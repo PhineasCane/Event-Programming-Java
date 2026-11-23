@@ -1,0 +1,30 @@
+# Compiled Java files
+*.class
+
+# Maven and Gradle build output
+target/
+build/
+.gradle/
+out/
+bin/
+
+# Generated local database
+/week10-university-system/university.db
+
+# IDE files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# VS Code: keep shareable project settings/configuration
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# OS files
+.DS_Store
+Thumbs.db
