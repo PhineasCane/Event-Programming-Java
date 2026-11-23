@@ -1,23 +1,33 @@
 package com.university;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 // This class handles the connection to the database
 public class DatabaseUtil {
-    // The URL of the database. "university_db" is the name we created in Phase 1
-    private static final String URL = "jdbc:mysql://localhost:3306/university_db";
+    private static final Dotenv DOTENV = Dotenv.configure()
+            .directory(".")
+            .ignoreIfMissing()
+            .load();
+    private static final String URL = DOTENV.get("DB_URL", "jdbc:mysql://localhost:3306/university_db");
+    private static final String USER = DOTENV.get("DB_USER", "root");
+    private static final String PASSWORD = requiredSetting("DB_PASSWORD");
 
-    // The default username for MySQL
-    private static final String USER = "root";
-
-    // CHANGE THIS TO YOUR ACTUAL MYSQL PASSWORD
-    private static final String PASSWORD = "Githuthu12";
-
-    // This method returns a Connection object. It throws SQLException if it fails.
     public static Connection getConnection() throws SQLException {
-        // DriverManager attempts to connect to the database using the URL, USER, and PASSWORD
         return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    private static String requiredSetting(String name) {
+        String value = DOTENV.get(name);
+        if (value == null || value.isBlank()) {
+            throw new IllegalStateException(
+                    "Missing required setting " + name
+                            + " in week10-university-system/.env or the process environment."
+            );
+        }
+        return value;
     }
 }

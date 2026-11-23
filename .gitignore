@@ -11,6 +11,9 @@ bin/
 # Generated local database
 /week10-university-system/university.db
 
+# Local environment variables and credentials
+.env
+
 # IDE files
 .idea/
 *.iml

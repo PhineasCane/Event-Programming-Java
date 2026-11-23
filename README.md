@@ -151,3 +151,54 @@
 │ (university_db: students,   │ ─────────────────────────► │   (Worker Thread Consumer)   │
 │  programs)                  │    ResultSet / Updates     └──────────────────────────────┘
 └─────────────────────────────┘
+```
+
+---
+
+## 🚀 How to Run Locally
+
+### Prerequisites
+
+- **JDK 21+** installed and configured on `PATH`. Weeks 6 and 7 are configured for **JDK 25**.
+- **Apache Maven 3.8+** for the JavaFX Maven projects.
+- **MySQL Server 8.x** for the Week 10 University Management System.
+
+### 1. Run a Standalone Swing App (Week 5)
+
+From the repository root, compile and launch the File Manager:
+
+```powershell
+cd week05-advanced-swing\activity5-capstone-file-manager
+javac FileManager.java
+java FileManager
+```
+
+### 2. Run a JavaFX Maven Project
+
+Change to the project folder containing its `pom.xml`, then run `javafx:run`. For example, to launch the Week 8 Reactive Form:
+
+```powershell
+cd week08-javafx-bindings
+mvn clean javafx:run
+```
+
+The same Maven command works from the Week 2 (`week02-observer-pattern\calculator-fx`), Week 6 (`week06-javafx`), Week 7 (`week07-javafx-events`), and Week 9 (`week09-async-javafx`) project folders. Weeks 6 and 7 require JDK 25 as configured in their `pom.xml` files.
+
+### 3. Run the Week 10 Capstone (University Management System)
+
+1. Start MySQL Server and run `week10-university-system\uni.sql` in MySQL Workbench to create `university_db` and its tables.
+2. Create a file named `.env` inside `week10-university-system` (if it does not already exist) and add your MySQL password with this exact, case-sensitive key:
+
+   ```dotenv
+   DB_PASSWORD=your_mysql_password
+   ```
+
+   `DB_USER` defaults to `root`, and `DB_URL` defaults to `jdbc:mysql://localhost:3306/university_db`. Add either key to `.env` if your local settings differ.
+3. From the repository root, launch the application:
+
+   ```powershell
+   cd week10-university-system
+   mvn clean javafx:run
+   ```
+
+The root `.gitignore` excludes `.env`. Keep real credentials there and never commit them to GitHub.
